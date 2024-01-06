@@ -30,7 +30,10 @@ RS485Class::RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, P
 {
 }
 #endif
+RS485Class::RS485Class():_transmisionBegun(false)
+{
 
+}
 RS485Class::RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin) :
   _serial(&hwSerial),
   _txPin(txPin),
@@ -38,6 +41,11 @@ RS485Class::RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin
   _rePin(rePin),
   _transmisionBegun(false)
 {
+}
+
+void    RS485Class::setSerial(HardwareSerial* phwSerial)
+{
+    _serial=phwSerial;
 }
 
 void RS485Class::begin(unsigned long baudrate)
@@ -206,5 +214,7 @@ void RS485Class::setDelays(int predelay, int postdelay)
 #ifdef RS485_SERIAL_PORT
 RS485Class RS485(RS485_SERIAL_PORT, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
 #else
-RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
+// nick change
+//RS485Class RS485(SERIAL_PORT_HARDWARE, RS485_DEFAULT_TX_PIN, RS485_DEFAULT_DE_PIN, RS485_DEFAULT_RE_PIN);
+RS485Class RS485;
 #endif

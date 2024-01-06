@@ -55,7 +55,9 @@ class RS485Class : public Stream {
 #ifdef __MBED__
     RS485Class(HardwareSerial& hwSerial, PinName txPin, PinName dePin, PinName rePin);
 #endif
+    // nick edit RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
     RS485Class(HardwareSerial& hwSerial, int txPin, int dePin, int rePin);
+    RS485Class();
 
     virtual void begin(unsigned long baudrate);
     virtual void begin(unsigned long baudrate, uint16_t config);
@@ -81,6 +83,7 @@ class RS485Class : public Stream {
     void setPins(int txPin, int dePin, int rePin);
 
     void setDelays(int predelay, int postdelay);
+    void    setSerial(HardwareSerial* phwSerial);
 
   private:
     HardwareSerial* _serial;
